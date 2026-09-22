@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Klaw convierte tus ideas en videos explicativos de pizarra con IA." />
+    <title>Klaw | Videos explicativos de pizarra con IA</title>
+    <style>
+      html, body { margin: 0; background: #002D62; }
+      .boot { min-height: 100vh; display: grid; place-items: center; padding: 2rem; box-sizing: border-box;
+              color: #EAF0F8; font: 400 1rem/1.5 system-ui, "Segoe UI", sans-serif; text-align: center; }
+      .boot strong { color: #CFA761; font-size: 1.4rem; display: block; margin-bottom: .5rem; }
+      .boot-help { max-width: 46ch; opacity: 0; animation: boot-show 0s 5s forwards; }
+      @keyframes boot-show { to { opacity: 1; } }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- React reemplaza este bloque al iniciar. Si sigue visible, el JavaScript no se ejecutó. -->
+      <div class="boot">
+        <div>
+          <strong>Klaw</strong>
+          <p class="boot-help">
+            Si este mensaje no desaparece, GitHub Pages está publicando el código sin compilar.
+            En el repositorio: Settings → Pages → Source → GitHub Actions, y verifica en la pestaña
+            Actions que el flujo "Publicar en GitHub Pages" termine en verde.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
