@@ -1,0 +1,39 @@
+# Klaw — orquestación local.
+#   cp .env.example .env   # (opcional) añade tus API keys
+#   docker compose up --build
+# Frontend: http://localhost:3000 · API: http://localhost:8000/docs
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: klaw-backend
+    ports:
+      - "8000:8000"
+    environment:
+      KLAW_ENVIRONMENT: ${KLAW_ENVIRONMENT:-development}
+      KLAW_LOG_LEVEL: ${KLAW_LOG_LEVEL:-INFO}
+      KLAW_CORS_ORIGINS: ${KLAW_CORS_ORIGINS:-http://localhost:3000}
+      # Sin API key → modo demo automático.
+      KLAW_LLM_PROVIDER: ${KLAW_LLM_PROVIDER:-anthropic}
+      KLAW_ANTHROPIC_API_KEY: ${KLAW_ANTHROPIC_API_KEY:-}
+      KLAW_ANTHROPIC_MODEL: ${KLAW_ANTHROPIC_MODEL:-claude-sonnet-4-5}
+      KLAW_OPENAI_API_KEY: ${KLAW_OPENAI_API_KEY:-}
+      KLAW_OPENAI_MODEL: ${KLAW_OPENAI_MODEL:-gpt-4o-mini}
+      KLAW_HUNTER_API_KEY: ${KLAW_HUNTER_API_KEY:-}
+      KLAW_MAX_CONTACTS_PER_COMPANY: ${KLAW_MAX_CONTACTS_PER_COMPANY:-5}
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # URL del API tal como la ve el NAVEGADOR (no la red interna de Docker).
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    container_name: klaw-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped

@@ -1,5 +1,24 @@
-node_modules/
-dist/
+# Entorno
 .env
 .env.*
-.vercel/
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node / Next
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+npm-debug.log*
+
+# SO / IDE
+.DS_Store
+.idea/
+.vscode/
